@@ -3,6 +3,7 @@ import cookie from "@fastify/cookie";
 import websocket from "@fastify/websocket";
 
 import { createPoll } from "./routes/create-poll";
+import { deletePoll } from "./routes/delete-poll";
 import { getPoll } from "./routes/get-poll";
 import { voteOnPoll } from "./routes/vote-on-poll";
 import { pollResults } from "./ws/poll-results";
@@ -17,6 +18,7 @@ app.register(cookie, {
 app.register(websocket)
 
 app.register(createPoll);
+app.register(deletePoll);
 app.register(getPoll);
 app.register(voteOnPoll);
 app.register(pollResults);
