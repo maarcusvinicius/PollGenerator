@@ -26,7 +26,7 @@ model PollOption {
   title  String
   pollId String
 
-  poll  Poll   @relation(fields: [pollId], references: [id])
+  poll  Poll   @relation(fields: [pollId], references: [id], onDelete: Cascade)
   votes Vote[]
 }
 
