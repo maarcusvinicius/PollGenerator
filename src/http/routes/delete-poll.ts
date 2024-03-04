@@ -10,13 +10,25 @@ export async function deletePoll(app: FastifyInstance) {
       });
       const { pollId } = getPollParams.parse(req.params);
 
-      const deletedPoll = await prisma.poll.delete({
+      const votesToDelete = await prisma.vote.findMany({
+        where: {
+          pollId: pollId,
+        },
+      });
+      
+      await prisma.vote.deleteMany({
+        where: {
+          id: { in: votesToDelete.map((vote) => vote.id) },
+        },
+      });
+      
+      await prisma.poll.delete({
         where: {
           id: pollId,
         },
       });
 
-      return reply.status(204).send("Deletado com sucesso");
+      return reply.status(204).send({ message: "Deletado com sucesso" });
     } catch (error) {
 
       console.error(error);
