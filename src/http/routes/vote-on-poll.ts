@@ -46,6 +46,7 @@ export async function voteOnPoll(app: FastifyInstance) {
           pollOptionId: userPreviousVoteOnPoll.pollOptionId,
           votes: Number(votes)
         })
+        return reply.status(400).send({ message: "You voted! :)" });
       } else if (userPreviousVoteOnPoll) {
         return reply.status(400).send({ message: "You already voted on this pool..." });
       }
