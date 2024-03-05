@@ -10,6 +10,16 @@ export async function deletePoll(app: FastifyInstance) {
       });
       const { pollId } = getPollParams.parse(req.params);
 
+      const poll = await prisma.poll.findUnique({
+        where: {
+          id: pollId,
+        },
+      });
+
+      if (!poll) {
+        return reply.status(404).send({ error: "Poll not found" });
+      }
+
       const votesToDelete = await prisma.vote.findMany({
         where: {
           pollId: pollId,
@@ -28,11 +38,11 @@ export async function deletePoll(app: FastifyInstance) {
         },
       });
 
-      return reply.status(204).send({ message: "Deletado com sucesso" });
-    } catch (error) {
-
-      console.error(error);
-      return reply.status(500).send({ error: "Erro ao deletar a enquete" });
+        return reply.status(200).send({ message: "Poll deleted" });
+      } catch (error) {
+        console.error(error);
+        return reply.status(500).send({ error: "Error delete Poll" });
+      }
     }
-  });
+  )
 }
