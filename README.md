@@ -22,6 +22,8 @@ The application consists of providing with the aim of adjusting API routes, wher
 
 - Allows customers to receive real-time updates on voting
 
+- Delete poll with or without active votes (*adm function)
+
 <br />
 
 ## 🔧 Resources used
@@ -53,7 +55,7 @@ This project was developed with the following resources and technologies:
 -   */polls/:pollId* Route where you can see a specific poll/Poll, just needing to pass the poll id on the link:
 ```json
 {
-	http://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d
+	"http://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d"
 }
 ```
 
@@ -62,7 +64,7 @@ This project was developed with the following resources and technologies:
 -   */polls/:pollId/votes* Route where you can vote for an option in a specific poll/Poll, just needing to pass the id of a poll in the link:
 ```json
 {
-  http://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d/votes
+  "http://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d/votes"
 }
 ```
 
@@ -76,10 +78,19 @@ And pass the id of the desired option:
 
 <br />
 
+-   */polls/delete/:pollId* Route where you can delete poll, just needing to pass the id of a poll in the link:
+```json
+{
+  "http://localhost:3333/polls/delete/0573f5c2-4040-4573-8494-73f255abe71d/"
+}
+```
+
+<br />
+
 -   */polls/:pollId/results* Route where you can follow the results of a specific poll/Poll in real time, just needing to pass the poll id on the link and connect with the WebSocket route:
 ```json
 {
-  ws://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d/results
+  "ws://localhost:3333/polls/0573f5c2-4040-4573-8494-73f255abe71d/results"
 }
 ```
 
